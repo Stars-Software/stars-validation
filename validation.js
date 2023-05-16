@@ -22,6 +22,11 @@ function validate(data, schema) {
       }
     }
 
+    if (fieldSchema.equal && data[fieldSchema.equal] !== fieldValue) {
+      errors.push(`${fieldName} should be equal to ${fieldSchema.equal}.`);
+      return;
+    }
+
     if (fieldSchema.type && typeof fieldValue !== fieldSchema.type) {
       errors.push(`${fieldName} should be of type ${fieldSchema.type}.`);
       return;
@@ -85,6 +90,9 @@ const schemaWithNestedObject = {
     minLength: 8,
     pattern: /^(?=.*[A-Z])(?=.*\d).+$/,
   },
+  passwordConfirmation: {
+    equal:"password"
+  },
 };
 
 // Тестовые данные
@@ -100,6 +108,7 @@ const dataWithNestedObject = {
   },
   email: 'tsaryk2004@gmail.com',
   password: 'Password123',
+  passwordConfirmation: 'Password123'
 };
 
 // Вызов функции validate
