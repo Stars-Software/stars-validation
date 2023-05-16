@@ -13,6 +13,15 @@ function validate(data, schema) {
       }
     }
 
+
+    if (fieldSchema.pattern && typeof fieldValue === 'string') {
+      const regex = new RegExp(fieldSchema.pattern);
+      if (!regex.test(fieldValue)) {
+        errors.push(`${fieldName} does not match the required pattern.`);
+        return;
+      }
+    }
+
     if (fieldSchema.type && typeof fieldValue !== fieldSchema.type) {
       errors.push(`${fieldName} should be of type ${fieldSchema.type}.`);
       return;
@@ -52,7 +61,9 @@ function validate(data, schema) {
 // Схема для валидации тестовых данных
 const schemaWithNestedObject = {
   name: { type: 'string', minLength: 1 },
+
   age: { type: 'number', min: 18 },
+
   address: {
     type: 'object',
     schema: {
@@ -65,6 +76,14 @@ const schemaWithNestedObject = {
       },
       city: { type: 'string', minLength: 1 },
     },
+  },
+
+  email: { type: 'string', maxLength: 50, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ }, //должна быть собачка, точка, максимум 50 символов
+
+  password: {  // должна быть заглавная буква, цифра, минимум 8 символов
+    type: 'string',
+    minLength: 8,
+    pattern: /^(?=.*[A-Z])(?=.*\d).+$/,
   },
 };
 
@@ -79,6 +98,8 @@ const dataWithNestedObject = {
     },
     city: 'New York',
   },
+  email: 'tsaryk2004@gmail.com',
+  password: 'Password123',
 };
 
 // Вызов функции validate
