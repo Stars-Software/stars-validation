@@ -1,0 +1,23 @@
+{
+  "name": "stars-validation",
+  "version": "1.0.0",
+  "description": "This repository contains code for field validation using JavaScript. It provides a validate(data, schema) function that allows you to validate data against a specific schema.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stars-Software/stars-validation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stars-Software/stars-validation/issues"
+  },
+  "homepage": "https://github.com/Stars-Software/stars-validation#readme",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
